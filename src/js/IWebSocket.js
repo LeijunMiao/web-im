@@ -219,10 +219,14 @@
         
                     reader.onload = function () {
                         e.data = Utils.conversionBack(this.result);
+                        console.log(e);
                         if(e.data.operator && callbacks[e.data.operator]) {
                             var callback = callbacks[e.data.operator];
                             delete callbacks[e.data.operator];
-                            callback.resolve(e.data);
+                            callback.resolve({
+                                header: e.data.header,
+                                body: e.data.body
+                            });
                         }
                         else eventTarget.dispatchEvent(e);
                     }
@@ -461,13 +465,13 @@
                 if (packetLength > 1024) {
                     throw "the packet is big than 1024"
                 }
-                var header = $.Utils.ab2str(dataView.buffer.slice(20, 20 + headerLength));
-                var body = $.Utils.ab2str(dataView.buffer.slice(20 + headerLength));
+                var header = Utils.ab2str(dataView.buffer.slice(20, 20 + headerLength));
+                var body = Utils.ab2str(dataView.buffer.slice(20 + headerLength));
 
-                header = $.Utils.binToBase64($.Utils.stringToBin(header))
-                body = $.Utils.binToBase64($.Utils.stringToBin(body))
-                header = $.Utils.decrypt(header, asekey, iv);
-                body = $.Utils.decrypt(body, asekey, iv);
+                header = Utils.binToBase64(Utils.stringToBin(header))
+                body = Utils.binToBase64(Utils.stringToBin(body))
+                header = Utils.decrypt(header, asekey, iv);
+                body = Utils.decrypt(body, asekey, iv);
                 var results = {
                     operator: operator,
                     sequence: sequence,

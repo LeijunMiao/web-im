@@ -59,5 +59,8 @@ app.get('/', function (req, res) {
 app.get('/index2', function (req, res) {
     res.render('index2',{service: config.service});;
 });
+app.get('/3', function (req, res) {
+    res.render('index3',{service: config.service});;
+});
 
 app.use(express.static(__dirname + '/src'));

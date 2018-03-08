@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Sample of websocket with golang</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="./lib/crypto-js/crypto-js.js"></script>
+    <!-- <script src="./lib/crypto-js/aes.js"></script> -->
+    <!-- <script src="./lib/crypto-js/pad-zeropadding.js"></script> -->
+    <!-- <script src="./js/functions.js"></script> -->
+    <script src="./js/IWebSocket.js"></script>
+    <script src="./js/im.js"></script>
+    <script>
+        $(function () {
+            var im = new IM();
+            setTimeout(() => {
+                test();
+            }, 1000);
+            var test = function () {
+                im.init({
+                    os: 'win',
+                    os_version: '1.0',
+                    app: 'client',
+                    app_version: '1.0',
+                    tag: {}
+                }, function (data) {
+                    console.log(data);
+                });
+                im.bind({
+                    id: '',
+                    password: '',
+                }, function (data) {
+                    console.log(data);
+                });
+                im.lists(function(data){
+                    console.log(data);
+                });
+                
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <input id="name" type="text" />
+    <input type="button" id="sendBtn" value="send" />
+    <ul id="msg-list"></ul>
+</body>
+
+</html>
