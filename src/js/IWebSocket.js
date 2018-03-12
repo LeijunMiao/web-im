@@ -462,9 +462,9 @@
                 var bodyLength = dataView.getUint32(16, false);
 
                 var packetLength = headerLength + bodyLength + 20;
-                if (packetLength > 1024) {
-                    throw "the packet is big than 1024"
-                }
+                // if (packetLength > 1024) {
+                //     throw "the packet is big than 1024"
+                // }
                 var header = Utils.ab2str(dataView.buffer.slice(20, 20 + headerLength));
                 var body = Utils.ab2str(dataView.buffer.slice(20 + headerLength));
 
